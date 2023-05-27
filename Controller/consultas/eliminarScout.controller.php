@@ -53,7 +53,7 @@ try{
     $mail->Port = 465;
 
     $mail->setFrom('info@scoutscentinelas113.org', 'Equipo Scouts Centinelas');
-    $mail -> addAddress('jjuanjose1019@gmail.com'); //Correo que va utilizar Carlos para recibir la notificaciones
+    $mail -> addAddress('scoutscentinelas113cali@gmail.com'); //Correo que va utilizar Carlos para recibir la notificaciones
 
     $mail->isHTML(true);
     $mail->Subject = 'Scout Eliminado';

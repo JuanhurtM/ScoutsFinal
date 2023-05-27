@@ -51,7 +51,7 @@
             $mail->Port = 465;
 
             $mail->setFrom('info@scoutscentinelas113.org', 'Equipo Scouts Centinelas');
-            $mail -> addAddress('jjuanjose1019@gmail.com'); //Correo que va utilizar Carlos para recibir la notificaciones
+            $mail -> addAddress('scoutscentinelas113cali@gmail.com'); //Correo que va utilizar Carlos para recibir la notificaciones
             $mail->isHTML(true);
             $mail->Subject = 'Nuevo Scout registrado '. $NoDocumento;
             $mail->Body = 'Hola, <br><br>Tiene un nuevo registro en el sistema<br>Lo Invitamos a ingresar a https://scoutcentinelas113.org para validar y activar el nuevo usuario registrado con la siguiente informacion: <br> 
