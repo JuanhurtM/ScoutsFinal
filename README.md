@@ -15,5 +15,12 @@ Para ver el aplicativo funcionando solo basta con poner la siguiente url en un n
 
 http://localhost/Scouts
 
-
+--------------------------------------------------------------------------------------------------------------------------------
+CREDENCIALES PARA EL SMTP
+	
+Host = 'mail.scoutscentinelas113.org';
+Username = 'info@scoutscentinelas113.org';
+Password = 'CENTINELAS113';
+SMTPSecure = 'ssl';
+Port = 465;
 
