@@ -53,7 +53,7 @@ try{
     $mail->Port = 465;
 
     $mail->setFrom('info@scoutscentinelas113.org', 'Equipo Scouts Centinelas');
-    $mail -> addAddress('scoutscentinelas113cali@gmail.com'); //Correo que va utilizar Carlos para recibir la notificaciones
+    $mail -> addAddress('jjuanjose1019@gmail.com'); //Correo que va utilizar Carlos para recibir la notificaciones
 
     $mail->isHTML(true);
     $mail->Subject = 'Scout Eliminado';
@@ -86,23 +86,26 @@ try{
     echo 'Mensaje' . $mail->ErrorInfo;
 }
 
-$usuario = "SELECT * FROM usuarios WHERE NoIdScout = '$id'";
+$usuario = "SELECT * FROM usuarios WHERE NoIdentidad = '$id'";
 $activo = mysqli_query($mysqli, $usuario);
+$acudiente = "SELECT * FROM acudientes WHERE NoIdScout = '$id'";
+$ExitsAcu = mysqli_query($mysqli, $acudiente);
+$medicos = "SELECT * FROM datos_medicos WHERE NoIdScout = '$id'";
+$ExistMedicos = mysqli_query($mysqli, $medicos);
 
 
-
-if(mysqli_fetch_array($activo)){
+if(mysqli_fetch_array($activo) && mysqli_fetch_array($ExitsAcu) && mysqli_fetch_array($ExistMedicos)){
 
     //Si el usuraio esta activo ejecuta estas consultas
 
-    $sql0 = "DELETE FROM usuarios where NoIdScout = '$id'";
+    $sql0 = "DELETE FROM usuarios where NoIdentidad = '$id'";
     $sql1 = "DELETE FROM `datos_medicos` WHERE NoIdScout = '$id'";
     $sql2="DELETE s, a FROM scouts AS s JOIN acudientes AS a ON s.NoIdentidad = a.NoIdScout WHERE s.NoIdentidad = '$id'";
     $query0=mysqli_query($mysqli,$sql0);
     $query1=mysqli_query($mysqli,$sql1);
     $query2=mysqli_query($mysqli,$sql2);
     
-    if($query1 && $query2 && $query0){
+    if($query0 && $query1 && $query2){
         
         header('location:../../Views/Admins/inicio.php?eliminar=success');
         session_start();
@@ -112,18 +115,16 @@ if(mysqli_fetch_array($activo)){
         header('location:../../Views/Admins/inicio.php?eliminar=error');
     }
 
-
-
-}else{
+}else if(mysqli_fetch_array($ExitsAcu) && mysqli_fetch_array($ExistMedicos)){
 
     //Si no esta activo ejecutara estas consultas
 
-    $sql1 = "DELETE FROM `datos_medicos` WHERE NoIdScout = '$id'";
-    $sql2="DELETE s, a FROM scouts AS s JOIN acudientes AS a ON s.NoIdentidad = a.NoIdScout WHERE s.NoIdentidad = '$id'";
-    $query1=mysqli_query($mysqli,$sql1);
-    $query2=mysqli_query($mysqli,$sql2);
+    $sql3 = "DELETE FROM `datos_medicos` WHERE NoIdScout = '$id'";
+    $sql4="DELETE s, a FROM scouts AS s JOIN acudientes AS a ON s.NoIdentidad = a.NoIdScout WHERE s.NoIdentidad = '$id'";
+    $query3=mysqli_query($mysqli,$sql3);
+    $query4=mysqli_query($mysqli,$sql4);
 
-    if($query1 && $query2){
+    if($query3 && $query4){
         
         header('location:../../Views/Admins/inicio.php?eliminar=success');
         session_start();
@@ -132,6 +133,75 @@ if(mysqli_fetch_array($activo)){
     }else{
         header('location:../../Views/Admins/inicio.php?eliminar=error');
     }
+
+} else if (mysqli_fetch_array($ExitsAcu)){
+
+    
+    $sql5="DELETE s, a FROM scouts AS s JOIN acudientes AS a ON s.NoIdentidad = a.NoIdScout WHERE s.NoIdentidad = '$id'";
+
+    $query5=mysqli_query($mysqli,$sql5);
+
+    if($query5){
+        
+        header('location:../../Views/Admins/inicio.php?eliminar=success');
+        session_start();
+        $_SESSION['eliminar'] = 'Scout Eliminado!';
+
+    }else{
+        header('location:../../Views/Admins/inicio.php?eliminar=error');
+    }
+
+} else if (mysqli_fetch_array($ExistMedicos)){
+
+    $sql6 = "DELETE FROM `datos_medicos` WHERE NoIdScout = '$id'";
+    $slq7 = "DELETE FROM scouts WHERE NoIdentidad = '$id'";
+    $query6 = mysqli_query($mysqli,$sql6);
+    $query7 = mysqli_query($mysqli,$sql7);
+
+    if($query6 && $query7){
+        
+        header('location:../../Views/Admins/inicio.php?eliminar=success');
+        session_start();
+        $_SESSION['eliminar'] = 'Scout Eliminado!';
+
+    }else{
+        header('location:../../Views/Admins/inicio.php?eliminar=error');
+    }
+
+} else if(mysqli_fetch_array($activo)){
+
+    //Si no esta activo ejecutara estas consultas
+
+    $sql8 = "DELETE FROM usuarios where NoIdentidad = '$id'";
+    $slq9 = "DELETE FROM scouts WHERE NoIdentidad = '$id'";
+    $query8=mysqli_query($mysqli,$sql8);
+    $query9=mysqli_query($mysqli,$slq9);
+
+    if($query8 && $query9){
+        
+        header('location:../../Views/Admins/inicio.php?eliminar=success');
+        session_start();
+        $_SESSION['eliminar'] = 'Scout Eliminado!';
+
+    }else{
+        header('location:../../Views/Admins/inicio.php?eliminar=error');
+    }
+
+} else {
+
+    $sql10 = "DELETE FROM scouts WHERE NoIdentidad = '$id'";
+    $query10 = mysqli_query($mysqli,$sql10);
+
+    if($query10){
+        
+        header('location:../../Views/Admins/inicio.php?eliminar=success');
+        session_start();
+        $_SESSION['eliminar'] = 'Scout Eliminado!';
+
+    }else{
+        header('location:../../Views/Admins/inicio.php?eliminar=error');
+    }
+
 
 }
 

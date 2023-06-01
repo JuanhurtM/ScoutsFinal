@@ -112,8 +112,9 @@ if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2 || $_SESSION['rol'] == 3){
                                         </div>
                                     
                                     <button type="submit" class="btn fw-bold text-light text-center mt-5 mb-3" style="background-color: #c50d0d;">Guardar</button>
+                                    <button type="submit" name="btnRegistrar" class="btn fw-bold text-light text-center mt-5 mb-3" style="background-color: #c50d0d;">Registrar</button>
                                     <!-- <button onclick="window.print()" class="btn fw-bold text-light text-center mt-5 mb-3" style="background-color: #c50d0d;">Imprimir</button> -->
-
+                                    <a onclick="window.print()" href="editarAcudienteScout.php?id=<?php echo $NoIdScout;?>" class="btn fw-bold text-light text-center mt-5 mb-3" style="background-color: #c50d0d;">Imprimir <img src="../../Assets/Img/printer-fill.svg"></a>
                                 </form>
                                 <a href="inicio.php" class="btn btn-success text-light fw-bold">Volver</a>
                             </div>

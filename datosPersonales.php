@@ -157,8 +157,11 @@
                                     </div>
                                     <div class="text-center">
                                         <button type="submit" name="btnRegistrar"  class="btn fw-bold text-light w-50 text-center mt-5 mb-3" style="background-color: #c50d0d;">Enviar Formulario</button>
+                                        <br>
+                                        <a href="datosAcudiente.php" class="btn fw-bold text-light text-center mt-5 mb-3" style="background-color: #c50d0d;">Siguiente</a>
                                     </div>
                                 </form>
+                               
                             </div>
                         </div>
                     </div>
